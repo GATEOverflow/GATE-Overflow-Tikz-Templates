@@ -1,0 +1,188 @@
+\tikzstyle{branch}=[>=stealth',shorten >=1pt,node distance=2cm,on grid,auto]
+\begin{tikzpicture}[>=stealth,shorten >=1pt,node distance=2cm,on grid,auto]
+  \node[initial,state,accepting] (C)                {$C$};
+  \node[state,accepting]         (D) [right of=C]   {$D$};
+  \node[state]                   (E) [right of=D]  {$E$};   
+
+
+  \path[->] (C) edge [loop above ]     node {a} (C)
+                edge [below]           node {b} (D)
+            (D) edge [loop above]      node {b} (D)
+                edge [below]           node {a} (E)
+            (E) edge [loop above]     node {a} (E)
+                edge [loop below]    node {b} (E);
+                 
+            
+\end{tikzpicture}
+\begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=4cm,on grid,auto]
+  \node[state,accepting] (A)                {$A$};
+  \node[state]                   (B) [below left of=A]  {$B$}; 
+  \node[state]                   (C) [below right of=A]  {$C$};   
+
+
+
+  \path[->] (A) edge [bend left]   node {1/01} (B)
+                edge[loop above]    node{0/00} (A)
+            (B) edge []  node {1/10}    (C)
+                edge [bend left] node {0/01}    (A)
+            (C) edge   node {0/01}  (A)
+                edge [loop above] node {1/10}    (C);
+            
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=2cm,on grid,auto]
+  \node[state,initial]          (A)                {};
+  \node[state]                   (B) [right of=A]  {}; 
+  \node[state]                   (C) [right of=B]  {};   
+  \node[state,accepting]        (D) [right of= C] {};
+  
+ \path[->] (A) edge [bend left]     node {0} (B)
+                edge [loop above]      node{1} (A)
+            (B) edge      node{0} (C)
+                edge [bend left]      node{1} (A)
+            (C) edge            node{1} (D)
+                edge [loop above]     node{0} (C)
+            (D) edge [loop above]     node{0,1} (D);
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,auto]
+  \node[state,initial]          (A)                {};
+  \node[state]                   (B) [right of=A]  {}; 
+  \node[state,accepting]        (C) [below of =A]  {};   
+  
+  
+ \path[->] (A) edge [bend left]     node {0,1} (B)
+                edge      node{1} (C)
+            (B) edge      node{0} (C)
+                edge [bend left]      node{0} (A)
+                edge [loop above]  node{0,1} (B);
+          
+           
+\end{tikzpicture}
+
+\begin{tikzpicture}[shorten >=1pt,node distance=4cm,on grid,auto]
+  
+
+  \node[state,]  (Y)                 {$Y$};
+  \node[state,initial]  (X) [below left of=Y]  {$X$};
+  \node[state]                   (Z)[below of=Y]{$Z$};
+
+  \path[->]
+    (X) edge    [loop below]    node{1} (X)
+        edge    [bend left]     node{0} (Y)
+        edge    [bend left]     node{0} (Z)
+    (Y) edge    [loop above]    node{0} (Y)
+        edge    [bend left]     node {0} (Z)
+    (Z) edge    [bend left]     node {1} (Y)
+         edge    [loop below]    node{1} (Z)
+         edge    [bend left]     node {0} (X);
+    
+    
+\end{tikzpicture}
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+  
+
+  \node[state,initial]  (Q_0)                 {$Q_0$};
+  \node[state]          (Q_1) [right of=Q_0]  {$Q_1$};
+
+  \path[->]
+      (Q_0)  edge      node {1/1}  (Q_1)
+            edge [loop above] node {0/0} (Q_0)
+      (Q_1) edge  [loop above]  node {0/1}  (Q_1)
+        edge [loop below]   node{1/0}(Q_1);
+\end{tikzpicture}
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+  
+
+  \node[state]          (S)                {$S=1$};
+  \node[state]                 (t) [right of=S]  {$S=0$}; 
+  
+  
+   \path[->]
+   (S)  edge    [bend left]    node{x=0} (t)
+        edge    [loop above]     node{x=1} (S)
+    (t) edge    [bend left]     node{y=0} (S)
+       edge    [loop above]    node{y=1} (t);
+   
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+\tikzstyle{every state}=[]
+  \node[initial,state] (s)                {$s$};
+  \node[state,accepting]         (t) [right of=s]   {$t$};
+  \node[state]                   (E) [below of=s]  {};   
+
+
+  \path[->] (s) edge [bend left]     node {b} (t)
+                edge [bend left]    node{a} (E)
+            (t) edge [loop above]   node {a} (t)
+                edge [bend left]    node {b} (s)
+            (E) edge [bend left]    node {a} (s)
+                edge [loop below]   node {b} (E);
+                
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=2cm,on grid,auto]
+  \node[state,initial]      (q_0)                {$q_0$};
+  \node[state,accepting]     (q_1) [right of=A]  {$q_1$}; 
+  \node[state,accepting]    (q_2) [right of=B]  {$q_2$};   
+  \node[state]              (q_3) [above of=q_1] {$q_3$};
+  
+ \path[->] (q_0) edge [bend left]     node {a} (q_1)
+                edge [loop above]      node{b} (q_0)
+            (q_1) edge [bend left]     node{a} (q_2)
+                edge [loop below]      node{b} (q_1)
+            (q_2) edge [bend left]     node{a} (q_1)
+                edge [loop below]     node{b} (q_2)
+            (q_3) edge    node{a} (q_1)
+                edge  node{b} (q_2);
+\end{tikzpicture}
+
+
+
+\begin{tikzpicture}[>=stealth',shorten >=1pt,node distance=3cm,on grid,auto]
+    \node[state,accepting] (S_1)    {$S_1$};
+    \node[state,initial]    (S_0)[below left of=S_1] {$S_0$};
+    \node[state]           (S_2)[below right of=S_1] {$S_2$};
+    \node[state,accepting] (S_3) [below right of=S_0] {$S_3$};
+    
+     \path[->]
+    (S_0) edge [bend left]     node {x} (S_1)
+          edge [bend left]     node {y} (S_3)
+    (S_1) edge [bend left]     node {x} (S_0)
+          edge [bend left]     node {y} (S_2)
+    (S_2) edge [bend left]     node {x} (S_3)
+          edge [bend left]     node {y} (S_1)
+    (S_3) edge [bend left]     node {x} (S_2)
+          edge [bend left]     node {y} (S_0);
+            
+    
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=blue,draw=none,text=white]
+
+  \node[state]         (A)                    {$q_a$};
+  \node[state]         (B) [above right of=A] {$q_b$};
+  \node[state]         (D) [below right of=A] {$q_d$};
+  \node[state]         (C) [below right of=B] {$q_c$};
+  \node[state]         (E) [below of=D]       {$q_e$};
+
+  \path (A) edge              node {0,1,L} (B)
+            edge              node {1,1,R} (C)
+        (B) edge [loop above] node {1,1,L} (B)
+            edge              node {0,1,L} (C)
+        (C) edge              node {0,1,L} (D)
+            edge [bend left]  node {1,0,R} (E)
+        (D) edge [loop below] node {1,1,R} (D)
+            edge              node {0,1,R} (A)
+        (E) edge [bend left]  node {1,0,R} (A);
+\end{tikzpicture}
+
+

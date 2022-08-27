@@ -1,0 +1,152 @@
+\tikzstyle{branch}=[fill,shape=circle,minimum size=3pt,inner sep=0pt]
+\begin{tikzpicture}[label distance=2mm]
+
+    \node (x3) at (0,0) {$x_3$};
+    \node (x2) at (1,0) {$x_2$};
+    \node (x1) at (2,0) {$x_1$};
+    \node (x0) at (3,0) {$x_0$};
+
+    \node[not gate US, draw, rotate=-90] at ($(x2)+(0.5,-1)$) (Not2) {};
+    \node[not gate US, draw, rotate=-90] at ($(x1)+(0.5,-1)$) (Not1) {};
+    \node[not gate US, draw, rotate=-90] at ($(x0)+(0.5,-1)$) (Not0) {};
+
+    \node[or gate US, draw, logic gate inputs=nnn] at ($(x0)+(2,-2)$) (Or1) {};
+    \node[or gate US, draw, logic gate inputs=nnnn] at ($(Or1)+(0,-1)$) (Or2) {};
+    \node[or gate US, draw, logic gate inputs=nnn] at ($(Or2)+(0,-1)$) (Or3) {};
+    \node[xor gate US, draw, logic gate inputs=nn] at ($(Or3)+(0,-1)$) (Xor1) {};
+    \node[and gate US, draw, logic gate inputs=nn, anchor=input 1] at ($(Or3.output)+(1,0)$) (And1) {};
+    \node[nor gate US, draw, logic gate inputs=nn, anchor=input 1] at ($(Or2.output -| And1.output)+(1,0)$) (Nor1) {};
+    \node[and gate US, draw, logic gate inputs=nn, anchor=input 1] at ($(Or1.output -| Nor1.output)+(1,0)$) (And2) {};
+
+    \foreach \i in {2,1,0}
+    {
+        \path (x\i) -- coordinate (punt\i) (x\i |- Not\i.input);
+        \draw (punt\i) node[branch] {} -| (Not\i.input);
+    }
+    \draw (x3) |- (Or2.input 1);
+    \draw (x3 |- Or1.input 1) node[branch] {} -- (Or1.input 1);
+    \draw (x2) |- (Xor1.input 1);
+    \draw (x2 |- Or3.input 1) node[branch] {} -- (Or3.input 1);
+    \draw (Not2.output) |- (Or2.input 2);
+    \draw (x1) |- (Or3.input 2);
+    \draw (x1 |- Or1.input 2) node[branch] {} -- (Or1.input 2);
+    \draw (Not1.output) |- (Xor1.input 2);
+    \draw (Not1.output |- Or2.input 3) node[branch] {} -- (Or2.input 3);
+    \draw (x0) |- (Or2.input 4);
+    \draw (Not0.output) |- (Or3.input 3);
+    \draw (Not0.output |- Or1.input 3) node[branch] {} -- (Or1.input 3);
+    \draw (Or3.output) -- (And1.input 1);
+    \draw (Xor1.output) -- ([xshift=0.5cm]Xor1.output) |- (And1.input 2);
+    \draw (Or2.output) -- (Nor1.input 1);
+    \draw (And1.output) -- ([xshift=0.5cm]And1.output) |- (Nor1.input 2);
+    \draw (Or1.output) -- (And2.input 1);
+    \draw (Nor1.output) -- ([xshift=0.5cm]Nor1.output) |- (And2.input 2);
+    \draw (And2.output) -- ([xshift=0.5cm]And2.output) node[above] {$f_1$};
+
+\end{tikzpicture}
+
+
+\begin{tikzpicture}
+  
+  \node (c) at (0,0) {};
+  \node (a) at (0,-.6) {\footnotesize $a$};
+  \node (b) at (0,-1.6) {\footnotesize $b$};
+  \node (d) at (0,-2.2) {};
+  
+  
+  \node[and gate US, draw,logic gate inputs=nn] at ($(c) + (1, 0)$) (anda) {};
+  \node[and gate US, draw,logic gate inputs=nn] at ($(a) + (1, -0.5)$) (andb) {};
+  \node[and gate US, draw,logic gate inputs=nn] at ($(d) + (1, 0)$) (andc) {};
+  \node[or gate US, draw, rotate=0, logic gate inputs=nnn] at ($(a) + (2.5, -.5)$) (oro) {};
+  
+   \draw (a)   -| +(0.4,0) |- (anda.input 2);
+  \draw (a) -- +(0.4,-.008) -| +(0.4,0) |- (andb.input 1);
+   \draw (b)   -| +(0.4,0) |- (andb.input 2);
+  \draw (b) -- +(0.4,-.008) -| +(0.4,0) |- (andc.input 1);
+  \draw (c)  (0.4,.1) -- (0.7,.1);
+  \draw (c) (0.4,.1) |- (0.4,.5) -- (3.2,.5) -| (3.2,-1.1);
+  \draw (d)  (0.4,-2.3) -- (0.7,-2.3);
+  \draw (d) (0.4,-2.3) |- (0.4,-2.7) -- (3.2,-2.7) -| (3.2,-1.1);
+  
+  \draw (anda.output) -- ([xshift=0.2cm,yshift=0cm]anda.output) |- (oro.input 1);
+  \draw (andb.output) -- ([xshift=0.2cm,yshift=0cm]andb.output) |- (oro.input 2);
+  \draw (andc.output) -- ([xshift=0.2cm,yshift=0cm]andc.output) |- (oro.input 3);
+
+  \draw (oro.output) -- node[at end, above]{\tiny $Q$} ($(oro) + (1.3, 0)$);
+  
+  \filldraw 
+(0.4,-.6008) circle (1pt) node[align=left,   left] {} 
+(0.4,-1.6008) circle (1pt) node[align=left,   left] {} 
+(3.2,-1.1) circle (1pt) node[align=left,   left] {};
+  
+\end{tikzpicture}
+%https://gateoverflow.in/2750/gate1996-2-21
+\tikzstyle{branch}=[fill,shape=circle,minimum size=3pt,inner sep=0pt]
+\begin{tikzpicture}[
+    fulladder/.style={draw, minimum width=5cm,minimum height = 3cm,
+    label={[xshift=8mm]left:$c_\text{out}$},
+    label={[xshift=-6mm]right:$c_\text{in}$},
+    }]
+
+    \node[fulladder] (a) {};
+    \node[align=center,anchor=center] (lab) at (a.center) {$4-bit$\\\text{Binary}\\\text{Adder}};
+     \node[and gate US, draw, logic gate inputs=nn,rotate=-180] at (-0.6,2.5) (and1) {};
+\draw [->] (and1.output) -| (-1.7,1.5);
+    \draw[<-] (-2,1.5) --++(90:0.5cm) node [above] {$0$};
+    
+     \draw[<-] (-1.4,1.5) --++(90:0.5cm) node [above] {$0$};
+     \draw[<-] (-1.1,1.5) --++(90:0.5cm) node [above] {$0$};
+    
+ 
+    \draw[<-] (0.5,1.5) --++(90:1.5cm) node [above] {$b_3$};
+    \draw[<-] (1,1.5) --++(90:1.5cm) node [above] {$b_2$};
+    \draw[<-] (1.5,1.5) --++(90:1.5cm) node [above] {$b_1$};
+    \draw[<-] (2,1.5) --++(90:1.5cm) node [above] {$b_0$};
+    
+    \draw[->] (a.west) ( -2.5,0) -|(-3,-2.5) node [below] {$d_4$};
+    \draw[<-] (a.east) --++(0:1cm) node [right] {$0$};
+    \draw[->] (-0.5,-1.5) --++(-90:1cm) node [below] {$d_3$};
+     \draw[->] (-0,-1.5) --++(-90:1cm) node [below] {$d_2$};
+      \draw[->] (0.5,-1.5) --++(-90:1cm) node [below] {$d_1$};
+       \draw[->] (1,-1.5) --++(-90:1cm) node [below] {$d_0$};
+    
+    \draw  (and1.input 1) -- (0.5,2.415)node[branch] {};
+    \draw  (and1.input 2) -- (1,2.59)node[branch] {};
+
+\end{tikzpicture}
+
+%%% https://gateoverflow.in/118315/gate-cse-2017-set-1-question-33
+\begin{tikzpicture}[]
+ \def\radius{1.mm} 
+  % place dffs and draw connections
+   \renewcommand{\inpa}{}
+  \renewcommand{\inpb}{}
+  \renewcommand{\outa}{}
+  \renewcommand{\outb}{}
+    \input{inputs/jkff.tex}
+     \input{inputs/jk_leftclk.tex} 
+  \node [shape=dff] (DFF0) at (0,0) {};
+    \renewcommand{\inpa}{}
+  \renewcommand{\inpb}{}
+  \renewcommand{\outa}{}
+  \renewcommand{\outb}{}
+  \input{inputs/jkff.tex}
+   \input{inputs/jk_leftclk.tex} 
+  \node [shape=dff] (DFF1) at (3,0) {};
+  
+  \draw[very thick] (DFF1.Q) -| ($(DFF1.Q)+(0.5,0.7)$) -- ($(DFF0.D)+(-0.5,0.7)$) |- (DFF0.D);
+  \draw [-,very thick] (DFF0.Q) -- (DFF1.D);
+  
+  \node (A) at (-2.1,-1.3) {\textbf{\footnotesize{Clock}}};
+   \draw[very thick] (-1.5,-1.3)-- (1.9,-1.3) ;
+    \draw[-,very thick] (-1.1,-1.3) -- (-1.1,0)  -- ++(0.5,0);
+      \draw[-,very thick] (1.9,-1.3) -- (1.9,0)  -- ++(0.5,0);
+        
+     \node[xshift=-0.28cm,text width=0.05cm]{\textbf{T Flip-Flop}};
+     \node[text width=0.05cm, xshift=2.7cm]{\textbf{D Flip-Flop}};
+     \node[xshift=1cm]{$Q_1$};
+     \node[xshift=4cm]{$Q_0$};
+ 
+\end{tikzpicture}
+
+

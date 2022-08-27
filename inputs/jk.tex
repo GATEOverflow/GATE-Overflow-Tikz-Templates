@@ -1,0 +1,36 @@
+\documentclass[11pt,twoside]{article}
+
+% ------- Enable UTF8 characters ------- %
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, automata, positioning, quotes}
+
+\usepackage[floats,active,tightpage]{preview}
+\setlength\PreviewBorder{1em}
+
+    \begin{document}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[auto,
+node distance = 12mm and 12mm,
+    shorten > = 1pt,
+            > = Stealth,
+                semithick,
+ state/.style = {circle, fill=#1, draw=none,
+                 inner sep=1mm, text=white},
+ state/.default = black
+                        ]
+\node (A) [state]               {0};
+\node (M) [right=of A]          {};
+\node (B) [state, right=of M]   {1};
+
+%
+\path[->]  (A) edge [bend left,   "01{,}10"]   (B)
+            (B) edge [bend left,  "01{,}10"]   (A)
+            (A) edge [loop above, "00{,}11"]   (A)
+            (B) edge [loop above, "00{,}11"]   (B);
+    \end{tikzpicture}
+\end{figure} ([xshift=0.8cm]or1.output);
+
+    \end{document}

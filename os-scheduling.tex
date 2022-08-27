@@ -1,0 +1,17 @@
+%https://gateoverflow.in/333219/gate-cse-2020-question-12?show=333265#a333265
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,semithick,scale=0.7,transform shape]
+  \tikzstyle{elli}=[draw,ellipse,fill=green]
+
+\node [elli] (A) {waiting};
+\node [elli] (B) [above right of = A] {running};
+\node [elli] (C) [above left of = A] {ready};
+\node [elli] (D) [above left of = C] {new};
+\node [elli] (E) [above right of = B] {terminated};
+\path[->]
+(D) edge       [bend left]       node {admitted} (C)
+(B) edge       [bend left]       node {exit} (E)
+(B) edge       [bend right,looseness=0.9]       node [above]{interrupt} (C)
+(C) edge       [bend right,looseness=0.9]       node [below]{scheduler dispatch} (B)
+(A) edge       [bend left]       node {I/O or event completion} (C)
+(B) edge       [bend left]       node {I/O or event wait} (A);
+\end{tikzpicture}

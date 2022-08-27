@@ -1,0 +1,99 @@
+\begin{verbatim}
+\begin{tikztimingtable}
+  Clock 128\,MHz 0\degr    & H   12{2C} G \\ % ends with edge
+  Clock 128\,MHz 90\degr   & [C] 12{2C} C \\ % starts with edge
+  Clock 128\,MHz 180\degr  & C   12{2C} G \\ % ends with edge
+  Clock 128\,MHz 270\degr  &     12{2C} C \\
+\end{tikztimingtable}
+\end{verbatim}
+\begin{tikztimingtable}
+  Clock 128\,MHz 0\degr    & H   12{2C} G \\ % ends with edge
+  Clock 128\,MHz 90\degr   & [C] 12{2C} C \\ % starts with edge
+  Clock 128\,MHz 180\degr  & C   12{2C} G \\ % ends with edge
+  Clock 128\,MHz 270\degr  &     12{2C} C \\
+\end{tikztimingtable}
+
+
+\begin{verbatim}\begin{tikztimingtable}
+  Coarse Pulse                          & 3L 16H 6L \\
+  Coarse Pulse - Delayed 1              & 4L 16H 5L \\
+  Coarse Pulse - Delayed 2              & 5L 16H 4L \\
+  Coarse Pulse - Delayed 3              & 6L 16H 3L \\
+  \\ % Gives vertical space
+  Final Pulse Set                       & 3L 16H 6L \\
+  Final Pulse $\overline{\mbox{Reset}}$ & 6L 16H 3L \\
+  Final Pulse                           & 3L 19H 3L \\
+\end{tikztimingtable}
+\end{verbatim}
+\begin{tikztimingtable}
+  Coarse Pulse                          & 3L 16H 6L \\
+  Coarse Pulse - Delayed 1              & 4L 16H 5L \\
+  Coarse Pulse - Delayed 2              & 5L 16H 4L \\
+  Coarse Pulse - Delayed 3              & 6L 16H 3L \\
+  \\ % Gives vertical space
+  Final Pulse Set                       & 3L 16H 6L \\
+  Final Pulse $\overline{\mbox{Reset}}$ & 6L 16H 3L \\
+  Final Pulse                           & 3L 19H 3L \\
+\end{tikztimingtable}
+
+
+\begin{verbatim}
+  Clock 128\,MHz 0\degr    & H         12{2C}             G \\ % without notes
+  Clock 128\,MHz 0\degr    & H 2C N(A1) 8{2C} N(A5) 3{2C} G \\ % with    notes
+\end{verbatim}
+
+
+
+\begin{verbatim}
+  \begin{pgfonlayer}{background}
+    \foreach \n in {1,...,8}
+      \draw [help lines] (A\n) -- (B\n);
+  \end{pgfonlayer}
+\end{verbatim}
+
+
+
+\begin{verbatim}
+\def\degr{${}^\circ$}\begin{tikztimingtable}
+  Clock 128\,MHz 0\degr    & H 2C N(A1) 8{2C} N(A5) 3{2C} G\\
+  Clock 128\,MHz 90\degr   & [C] 2{2C} N(A2) 8{2C} N(A6) 2{2C} C\\
+  Clock 128\,MHz 180\degr  & C 2{2C} N(A3) 8{2C} N(A7) 2{2C} G\\
+  Clock 128\,MHz 270\degr  & 3{2C} N(A4) 8{2C} N(A8) 2C C\\
+  Coarse Pulse             & 3L 16H 6L \\
+  Coarse Pulse - Delayed 1 & 4L N(B2) 16H N(B6) 5L \\
+  Coarse Pulse - Delayed 2 & 5L N(B3) 16H N(B7) 4L \\
+  Coarse Pulse - Delayed 3 & 6L 16H 3L \\
+  \\
+  Final Pulse Set          & 3L 16H N(B5) 6L \\
+  Final Pulse $\overline{\mbox{Reset}}$ & 6L N(B4) 16H 3L \\
+  Final Pulse              & 3L N(B1) 19H N(B8) 3L \\
+\extracode
+  \tablerules
+  \begin{pgfonlayer}{background}
+    \foreach \n in {1,...,8}
+      \draw [help lines] (A\n) -- (B\n);
+  \end{pgfonlayer}
+\end{tikztimingtable}
+\end{verbatim}
+
+\def\degr{${}^\circ$}
+\begin{tikztimingtable}
+  Clock 128\,MHz 0\degr    & H 2C N(A1) 8{2C} N(A5) 3{2C} G\\
+  Clock 128\,MHz 90\degr   & [C] 2{2C} N(A2) 8{2C} N(A6) 2{2C} C\\
+  Clock 128\,MHz 180\degr  & C 2{2C} N(A3) 8{2C} N(A7) 2{2C} G\\
+  Clock 128\,MHz 270\degr  & 3{2C} N(A4) 8{2C} N(A8) 2C C\\
+  Coarse Pulse             & 3L 16H 6L \\
+  Coarse Pulse - Delayed 1 & 4L N(B2) 16H N(B6) 5L \\
+  Coarse Pulse - Delayed 2 & 5L N(B3) 16H N(B7) 4L \\
+  Coarse Pulse - Delayed 3 & 6L 16H 3L \\
+  \\
+  Final Pulse Set          & 3L 16H N(B5) 6L \\
+  Final Pulse $\overline{\mbox{Reset}}$ & 6L N(B4) 16H 3L \\
+  Final Pulse              & 3L N(B1) 19H N(B8) 3L \\
+\extracode
+  \tablerules
+  \begin{pgfonlayer}{background}
+    \foreach \n in {1,...,8}
+      \draw [help lines] (A\n) -- (B\n);
+  \end{pgfonlayer}
+\end{tikztimingtable}

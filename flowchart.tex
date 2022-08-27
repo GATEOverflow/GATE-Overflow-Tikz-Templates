@@ -1,0 +1,157 @@
+%%%%https://gateoverflow.in/333185/gate-cse-2020-question-46#349100
+
+
+\begin{tikzpicture}[level 1/.style={sibling distance=30mm},level 2/.style={sibling distance=48mm},level 3/.style={sibling distance=53mm},level 4/.style={sibling distance=33mm},level 5/.style={sibling distance=28mm},level distance = 30mm, scale = 0.8]
+
+\node[]{f2(5)}
+         child {node[anchor=south,draw,
+    rounded corners=0.3cm,
+    minimum height=0.5cm,
+    text width=2cm,
+    align =center](5){$\text{i=0+f1(5)}$}edge from parent[thick,solid]}
+         child {node[]{$\text{f2(4)}$}edge from parent[thick,solid]
+               child {node[anchor=west,draw,solid,
+    rounded corners=0.3cm,
+    minimum height=0.5cm,
+    text width=2cm,
+    align =center](4){$\text{i=i+f1(4)}$}edge from parent[thick,solid]}
+               child {node {$\text{f2(3)}$}
+                     child {node[anchor=west,draw,solid,
+    rounded corners=0.3cm,
+    minimum height=0.5cm,
+    text width=2cm,
+    align =center](3) {$\text{i=i+f1(3)}$}edge from parent[thick,solid]}
+                     child {node {$\text{f2(2)}$}
+                           child {node[anchor=south,draw,solid,
+    rounded corners=0.3cm,
+    minimum height=0.5cm,
+    text width=2cm,
+    align =center](2) {$\text{i=i+f1(2)}$}edge from parent[thick,solid]}
+                           child {node {$\text{f2(1)}$}
+                                 child {node[anchor=south,draw,solid,
+    rounded corners=0.3cm,
+    minimum height=0.5cm,
+    text width=2cm,
+    align =center](1) {$\text{i=i+f1(1)}$}edge from parent[thick,solid]
+                                 child{node[blue]{\boxed{i=55}}edge from parent[->,thick,dashed,blue]edge from parent[thick]}}
+                                 child {node {$\text{f2(0)}$}
+                                       child{node[align=center]{ if condition \\fails}edge from parent[thick,solid]}}}}}};
+\draw [->,thick,blue,dashed] (5.south) ++(0,0) |- (4.west) node[pos=0.25,fill=white,inner sep=0] {\boxed{{i=5}}};
+\draw [->,thick,blue,dashed] (4.south) ++(0,0) |- (3.west) node[pos=0.25,fill=white,inner sep=0,align=left] {\boxed{{i=14}}};
+\draw [->,thick,blue,dashed] (3.south) ++(0,0) |- (2.west) node[pos=0.25,fill=white,inner sep=0,align=left] {\boxed{{i=26}}};
+\draw [->,thick,blue,dashed] (2.south) ++(0,0) |- (1.west) node[pos=0.25,fill=white,inner sep=0,align=left] {\boxed{{i=40}}};
+
+\end{tikzpicture}
+
+
+%%%https://gateoverflow.in/118194/gate-cse-2017-set-1-question-14?show=120967#a120967
+
+
+\begin{tikzpicture}
+
+%%Big colorful rectangle
+
+\node[draw=violet!10,thick,fill=violet!10,
+    minimum width=5cm,
+    minimum height=8cm] at (0,0){};
+\node[draw=blue!11,thick,fill=blue!11,
+    minimum width=5cm,
+    minimum height=8cm] at (6,0){};
+\node[draw=orange!15,thick,fill=orange!15,
+    minimum width=5cm,
+    minimum height=8cm] at (0,-8.5){};
+\node[draw=pink!40,thick,fill=pink!40,
+    minimum width=5cm,
+    minimum height=7cm] at (6,-8){};
+\node[draw=yellow!15,thick,fill=yellow!15,
+    minimum width=3.3cm,
+    minimum height=5cm] at (2.8,-9.5){};
+\node[draw=cyan!15,thick,fill=cyan!15,
+    minimum width=5cm,
+    minimum height=1.4cm] at (3.2,-0.8){};
+
+%%%%small rectangle    
+
+\node[rectangle,draw,very thick,
+    fill =gray!20,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (closed) at (3,4) {CLOSED};
+\node[rectangle,draw,very thick,
+    fill =violet!20,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (listen) at (-0.5,1.5) {LISTEN};
+\node[rectangle,draw,very thick,
+    fill =violet!20,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (synr) at (-0.5,-1) {SYN-RECEIVED};
+\node[rectangle,draw,very thick,
+    fill =blue!30,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (syns) at (6.5,-1) {SYN-SENT};
+\node[rectangle,draw,very thick,
+    fill=green!30,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (estb) at (3,-4.2) {ESTABLISHED};
+    
+\node[rectangle,draw,very thick,
+    fill=orange!30,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (finw1) at (0.5,-7) {FIN-WAIT-1};
+\node[rectangle,draw,very thick,
+    fill=orange!30,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (finw2) at (-1,-9.5) {FIN-WAIT-2};
+\node[rectangle,draw,very thick,
+    fill=yellow!40,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (closing) at (2.8,-9.5) {CLOSING};
+\node[rectangle,draw,very thick,
+    fill=yellow!40,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (twait) at (2.8,-12) {TIME-WAIT};
+    
+\node[rectangle,draw,very thick,
+    fill=pink!90,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (cwait) at (6.2,-7.3) {CLOSE-WAIT};
+\node[rectangle,draw,very thick,
+    fill=pink!90,
+    minimum width = 2.2cm, 
+    minimum height = 0.7cm] (lack) at (6.2,-9.7) {LAST-ACK};
+    
+\node[](left)at(-0.5,-3.8) {\footnotesize{Open-Responder Sequence}};
+\node[](left)at(6.6,-3.8) {\footnotesize{Open-Initiator Sequence}};
+\node[](left)at(-0.6,-4.8) {\footnotesize{Close-Initiator Sequence}};
+\node[](left)at(6.4,-4.8) {\footnotesize{Close-Responder Sequence}};
+\node[](left)at(3.1,-7.2) {\footnotesize{Simultaneous Close}};
+
+%%%connection between rectangle
+
+\draw [-Triangle,thick,align=center]
+(closed.south) - ++(0,-0.8) -| (listen.north) node[pos=0.25,inner sep=0,fill=violet!10] {Passive Open\\ Set UP TCB};
+\draw [-Triangle,thick,align=center] (closed.east) -| (syns.north) node[pos=0.7,inner sep=0,fill=blue!11] {Active Open\\ Set UP TCB\\ Send SYN};
+\draw [-Triangle,thick,align=center] (listen.south) -- (synr.north) node[pos=0.5,inner sep=0,fill=violet!10] {Receive SYN\\ Send SYN+ACK};
+\draw [-Triangle,thick,align=center] (syns.west) -- (synr.east) node[pos=0.5,inner sep=0,fill=cyan!15,label=above:\footnotesize{Simultaneous Open}] {Receive SYN\\ Send ACK};
+\draw [-Triangle,thick,align=center] (synr.south) - ++(0,-1.5) -| (estb.north west) node[pos=0.05,inner sep=0,fill=violet!10,yshift=0.6cm] {Receive ACK};
+\draw [-Triangle,thick,align=center] (syns.south) - ++(0,-1.5) -| (estb.north east) node[pos=0,inner sep=0,fill=blue!11,yshift=0.6cm] {Receive SYN+ACK\\ Send ACK};
+
+\draw [-Triangle,thick,align=center]
+(estb.south) - ++(0,-0.9) -| (finw1.north) node[pos=0.7,inner sep=0,fill=orange!15,yshift=-0.6] {Close, Send FIN};
+\draw [-Triangle,thick,align=center] (estb.south east) - ++(0,-0.9) -| (cwait.north) node[pos=0.5,inner sep=0,fill=pink!40,yshift=-0.6cm] {Receive Fin\\ Send ACK};
+
+\draw [-Triangle,thick,align=center]
+(finw1.south) - ++(0,-0.4) -| (finw2.north) node[pos=0.7,inner sep=0,fill=orange!15,yshift=-0.4] {Receive ACK\\ for FIN};
+\draw [-Triangle,thick,align=center] (finw1.south east) - ++(0,-0.4) -| (closing.north) node[pos=0.7,inner sep=0,fill=yellow!15,yshift=-0.1cm] {Receive Fin\\ Send ACK};
+
+\draw [-Triangle,thick,align=center] (finw2.south) |- (twait.west) node[pos=0.3,inner sep=0,fill=orange!15] {Receive FIN\\ Send ACK};
+\draw [-Triangle,thick,align=center] (closing.south) -- (twait.north) node[pos=0.5,inner sep=0,fill=yellow!15] {Receive ACK\\ for FIN};
+
+\draw [-Triangle,thick,align=center] (cwait.south) -- (lack.north) node[pos=0.5,inner sep=0,fill=pink!40] {Wait for Application\\ Close, Send FIN};
+
+\draw [-Triangle,thick,align=center] (lack.south) -- (6.2,-11) -| (8.4,-11)--(8.4,5)-| (closed.north) node[pos=0,inner sep=0, fill=pink!40, xshift=-2.1cm,yshift=-15.45cm] {Receive ACK for FIN};
+
+
+\draw [-Triangle,thick,align=center]
+(twait.east) -| (8.4,-11) node[pos=0.3,inner sep=0,fill=white,xshift=-0.4] {Timer Expiration};
+   
+\end{tikzpicture}

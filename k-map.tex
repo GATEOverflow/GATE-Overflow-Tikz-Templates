@@ -1,0 +1,58 @@
+%https://gateoverflow.in/333203/gate-cse-2020-question-28?show=333313#a333313
+
+    \begin{karnaugh-map}[4][2][1][][]
+        \minterms{1,4,5,6,7}
+        \maxterms{0,2,3}
+        \implicant{4}{6}
+        \implicant{1}{5}
+        \draw[color=black, ultra thin] (0, 2) --
+    node [pos=0.7, above right, anchor=south west] {$bc$} 
+    node [pos=0.7, below left, anchor=north east] {$a$} 
+    ++(135:1);
+    \end{karnaugh-map}
+    
+    %https://gateoverflow.in/1814/gate2006-38
+\begin{center}
+
+ \begin{karnaugh-map}[4][4][1][$yz$][$wx$]
+       \minterms{5,7,12,13,15,11}
+        \autoterms[0]
+       %\indeterminats{2,5}
+       \implicant{5}{15}
+       \implicant{12}{13}
+       \implicant {15}{11}
+    \end{karnaugh-map}
+    
+    \begin{karnaugh-map}[4][4][1][$yz$][$wx$]
+       \minterms{5,7,12,13,15,11}
+        \autoterms[0]
+       %\indeterminats{2,5}
+       \implicant{5}{7}
+       \implicant{5}{13}
+       \implicant{12}{13}
+       \implicant {15}{11}
+       \implicant{7}{15}
+    \end{karnaugh-map}
+    
+      \begin{karnaugh-map}[4][4][1][$yz$][$wx$]
+       \minterms{5,7,12,13,15,11}
+        \autoterms[0]
+       %\indeterminats{2,5}
+       \implicant{12}{12}
+       \implicant{5}{15}
+       \implicant{11}{11}
+    \end{karnaugh-map}
+    
+      \begin{karnaugh-map}[4][4][1][$yz$][$wx$]
+       \minterms{5,7,12,13,15,11}
+        \autoterms[0]
+       %\indeterminats{2,5}
+       \implicant{13}{15}
+       \implicant{5}{7}
+       \implicant{5}{13}
+       \implicant{12}{13}
+       \implicant {15}{11}
+       \implicant{7}{15}
+    \end{karnaugh-map}
+    
+    \end{center}
