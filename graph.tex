@@ -1,3 +1,38 @@
+%https://tikz.dev/tikz-graphs
+
+%https://gateoverflow.in/166239/ugc-net-cse-november-2017-part-2-question-5
+
+\begin{tikzpicture}[scale = 0.7,transform shape,minimum size=1pt]
+\tikzstyle{mynode}=[circle,fill,inner sep=0pt,minimum size=1pt]
+
+\node[mynode] (e) at (0.8,3)[label={left:E}]  {};
+\node[mynode] (a) at (3,4.3)[label={above:A}] {};
+\node[mynode] (d) at (3,1.7) [label={below:D}]{};
+\node[mynode] (c) at (7,4.3)[label={above:C}] {};
+\node[mynode] (b) at (7,1.7) [label={below:B}]{};
+\node[mynode] (f) at (9.3,3)[label={right:F}] {};
+\node[mynode,minimum size=5pt] (g) at (5,3)[label={below:G}] {};
+
+\draw [-] (e) edge node[above] {$4$} (a);
+\draw [-] (a) edge node[left] {$2$} (d);
+\draw [-] (e) edge node[below] {$5$} (d);
+\draw [-] (a) edge node[above] {$6$} (c);
+
+\draw [-] (a) edge node[above] {$3$} (g);
+\draw [-] (d) edge node[above] {$4$} (g);
+\draw [-] (g) edge node[above] {$3$} (b);
+\draw [-] (d) edge node[above] {} (b);
+
+\draw [-] (c) edge node[above] {$5$} (f);
+\draw [-] (b) edge node[below] {$4$} (f);
+\draw [-] (c) edge node[right] {$4$} (b);
+\draw [-] (c) edge node[above] {$2$} (g);
+
+
+\end{tikzpicture}
+
+
+
 
 %https://gateoverflow.in/333236/gate-cse-2020-question-ga-5
 \begin{tikzpicture}[>=latex,shorten >=0.1pt,auto, thick,node distance=2.0cm]
@@ -46,37 +81,8 @@
    
 \end{tikzpicture}
 
-%https://gateoverflow.in/205089/gate2018-aptitude-set-4-ga-6?show=205155#a205155
-\begin{tikzpicture}[scale=0.7]
-\node[,draw,circle,minimum size= 0.5cm] at (-1,0) {} ;
-\draw[-,line width = 1mm] (-1,-1) node[left] {A} -- (6,-1)node[right]{B};
-\draw[->] (-0.5,0) -- (0,0);
-\node[,draw,circle,minimum size= 0.5cm] at (6,-2.3) {} ;
-\draw[<-] (5,-2.3) -- (5.5,-2.3);
-\path[<->] (-1,-1.5) edge node[ fill=white, anchor=center, pos=0.5,font=\bfseries] {d} (6,-1.5);
-%\draw[|<->|](-1,-1.5) -- node[below] {d} (6,-1.5);
-\node at (1.2,0){60 km/hr};
-\node at (3.8,-2.3) {90 km/hr};
-\end{tikzpicture}
 
-%%%%%%%%%%https://gateoverflow.in/313609/gate2018-2-ga-6?show=313610#a313610
-  \begin{tikzpicture}[thick]
-       
-        \draw (0,0) circle (1) node[above,shift={(0,1)}] {${}$};
-        \draw (1.2,0) circle (1) node[above,shift={(0,1)}] {${}$};
-        \draw (.6,-1.04) circle (1) node[shift={(1.1,-.6)}] {${}$};
 
-        \node at (.6,-.4) {O};
-        \node at (1.2,-.7) {Z};
-        \node at (0,-.7) {Y};
-        \node at (1.7,.3) {B};
-        \node at (.6,.3) {X};
-        \node at (-0.5,.3) {A};
-       
-      
-        \node at (.5,-1.5) {C};
-       
-\end{tikzpicture}
 
 
 
