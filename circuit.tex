@@ -1,4 +1,78 @@
 %https://tikz.dev/library-circuits
+%https://texdoc.org/serve/circuitikzmanual.pdf/0
+
+\tikzset{
+  multiplexer1/.pic ={
+    \coordinate (-out) at (.8,0);
+    \coordinate (-in-up) at (-0.8,.5);
+    \coordinate (-in-down) at (-0.8,-.5);
+     %\coordinate (-sel-down) at (0,0);
+    \draw[pic actions] (-.5,1.25) -- ++(1,-.5)
+    coordinate[midway](-sel-up) 
+   -- ++(0,-1.5) -- ++(-1,-.5)
+  coordinate[midway](-sel-down)
+   --cycle;
+   \draw[pic actions] (.5,0) -- (-out) (-in-up) -- +(.3,0) (-in-down) -- +(.3,0);% (mysel) node[below](-sel-down){};
+   % \draw[pic actions] (mysel) --++(0,-1);
+       
+
+    \node{ \tikzpictext};
+  }
+}
+
+%https://ec.gateoverflow.in/523/gate2014-3-16
+\begin{tikzpicture}
+
+\pic["MUX"] (one) {multiplexer1};
+
+\node at (one-in-up) [xshift=0.5cm]{0};
+\node at (one-in-down) [xshift=0.5cm]{1};
+\draw [-] (one-sel-down) --++ (-0.0,-1) node[below]{$S_1$};
+
+\pic["MUX"] (two) at ($(one-out)-(one-in-up)$)[xshift=2cm] {multiplexer1};
+\draw [-] (two-sel-down) --++ (-0.0,-1) node[below]{$S_2$};
+\node at (two-in-up) [xshift=0.5cm]{0};
+\node at (two-in-down) [xshift=0.5cm]{1};
+
+\draw [-] (one-out) -- (two-in-up);
+\draw[-] ($(one-out) + (0.5,0)$) |- ($(two-in-down)-(1,0)$);
+\node[anchor=input, not gate US, draw] at  (two-in-down) [xshift=-1cm] (not2){};
+
+\draw[-] (two-in-down) -- (not2.output); 
+\draw[-] (one-in-up) --++ (-2,0) node [left] (w){$W$};
+\node[anchor=input, not gate US, draw] at  (one-in-down) [xshift=-1cm] (not1){};
+\draw[-] ($(w.east)+(0.5,0)$) |- (not1.input);
+\draw[-] (one-in-down) -- (not1.output); 
+\draw[-] (two-out) --++(0.5,0) node[right]{$F$};
+
+\end{tikzpicture}
+
+%https://ec.gateoverflow.in/369/gate2014-1-40
+\begin{tikzpicture}[scale=.5]
+\node[xnor gate US, draw]  (xnor1){} node [below,yshift=-0.5cm]{XNOR};
+\node[xor gate US, draw, anchor=output] at (xnor1.output) [xshift=0cm,yshift=2cm] (xor1) {};
+\node [above,yshift=0.5cm] at (xor1) {XOR};
+\node[and gate US, draw, anchor=input 1] at (xnor1)[xshift=1.5cm,yshift=1cm] (and1){};
+\node [above]at (and1) [yshift=0.5cm]{AND}{};
+\coordinate (A) at (0,0);
+\coordinate (B) at ($(and1.input 1)-(xor1.output)$);
+
+\draw (xor1.output) -- ([xshift=0.5cm]xor1.output) [name path=line 1]  |-   ( A |- B) ;
+\draw (xnor1.output) -- ([xshift=0.5cm]xnor1.output) |- (and1.input 2);
+\draw (and1.output) -- ([xshift=0.5cm]and1.output) node [right] {F};
+
+\draw (xor1.input 1) --++ (-1,0) node [yshift=0.1cm,left] {X};
+\draw (xor1.input 2) --++ (-1,0) node [yshift=-0.1cm, left] { Y};
+\draw (xnor1.input 2) --++ (-1,0) node [left] {Z};
+\draw (xnor1.input 1) --++ (-0.5,0) [name path=line 2] |- (and1.input 1);
+
+\path [name intersections={of = line 1 and line 2}];
+\coordinate (S)  at (intersection-1);
+\node [fill=black,inner sep=1pt] at (S) {};
+
+\end{tikzpicture}
+
+
 
 \tikzstyle{branch}=[fill,shape=circle,minimum size=3pt,inner sep=0pt]
 \begin{tikzpicture}[label distance=2mm]
@@ -61,7 +135,7 @@
   \node[and gate US, draw,logic gate inputs=nn] at ($(d) + (1, 0)$) (andc) {};
   \node[or gate US, draw, rotate=0, logic gate inputs=nnn] at ($(a) + (2.5, -.5)$) (oro) {};
   
-   \draw (a)   -| +(0.4,0) |- (anda.input 2);
+   \draw (a)   --+(0.4,0) |- (anda.input 2);
   \draw (a) -- +(0.4,-.008) -| +(0.4,0) |- (andb.input 1);
    \draw (b)   -| +(0.4,0) |- (andb.input 2);
   \draw (b) -- +(0.4,-.008) -| +(0.4,0) |- (andc.input 1);
@@ -136,13 +210,13 @@
    \input{inputs/jk_leftclk.tex} 
   \node [shape=dff] (DFF1) at (3,0) {};
   
-  \draw[very thick] (DFF1.Q) -| ($(DFF1.Q)+(0.5,0.7)$) -- ($(DFF0.D)+(-0.5,0.7)$) |- (DFF0.D);
-  \draw [-,very thick] (DFF0.Q) -- (DFF1.D);
+  \draw[ thick] (DFF1.Q) -| ($(DFF1.Q)+(0.5,0.7)$) -- ($(DFF0.D)+(-0.5,0.7)$) |- (DFF0.D);
+  \draw [-,thick] (DFF0.Q) -- (DFF1.D);
   
   \node (A) at (-2.1,-1.3) {\textbf{\footnotesize{Clock}}};
-   \draw[very thick] (-1.5,-1.3)-- (1.9,-1.3) ;
-    \draw[-,very thick] (-1.1,-1.3) -- (-1.1,0)  -- ++(0.5,0);
-      \draw[-,very thick] (1.9,-1.3) -- (1.9,0)  -- ++(0.5,0);
+   \draw[thick] (-1.5,-1.3)-- (1.9,-1.3) ;
+    \draw[-, thick] (-1.1,-1.3) -- (-1.1,0)  -- ++(0.5,0);
+      \draw[-, thick] (1.9,-1.3) -- (1.9,0)  -- ++(0.5,0);
         
      \node[xshift=-0.28cm,text width=0.05cm]{\textbf{T Flip-Flop}};
      \node[text width=0.05cm, xshift=2.7cm]{\textbf{D Flip-Flop}};
