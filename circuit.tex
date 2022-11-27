@@ -225,4 +225,33 @@
  
 \end{tikzpicture}
 
+%https://ec.gateoverflow.in/229/gate2012-6
+\begin{tikzpicture}
+\node[nand gate US, draw, anchor=output] at (-7,6.7) (nand1) {};
+\node[nand gate US, draw, anchor=output] at (-7,8.7) (nand2) {};
+\node[nand gate US, draw, anchor=input 1] at (-5.8,8.7) (nand3) {};
+\node[nand gate US, draw, anchor=input 2] at (-5.8,6.7) (nand4) {};
+\draw (nand1.output) -- (nand4.input 2);
+\draw (nand2.output) -- (nand3.input 1);
+\draw (nand3.output) --++ (0.5,0)[name path=line 1] --++ (0,-1) --++ (-2,0) |- (nand4.input 1);
+\draw (nand4.output) -| (-4,7.8);
+\path[name path=line 2] (-4, 7.8) --++ (-2,0);
+\path[name intersections= {of=line 1 and line 2}];
+\coordinate (S)  at (intersection-1);
+
+\path[name path=circle]  (intersection-1) circle(1.mm);
+
+\path[name intersections= {of=line 2 and circle}];
+\tkzDrawArc[color=black](S,intersection-2)(intersection-1);
+\draw[-] (-4,7.8) -- (intersection-2);
+\draw[-] (intersection-1) --+ (-1.5,0) |- (nand3.input 2);
+
+\draw[-*] (nand2.input 1) --++ (-1,0) node[left] {A};
+\draw[-] (nand2.input 2) --++ (-0.5,0) |- (nand1.input 1);
+
+
+\draw[-*] (nand1.input 2) --++ (-1,0) node[left] {B};
+
+\draw[*-*] (-8.2,7.7) --+ (-0.5,0) node[left]{\text{\scriptsize{CLK}}};
+\end{tikzpicture}
 
